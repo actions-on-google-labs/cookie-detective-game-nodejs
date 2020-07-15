@@ -1,0 +1,65 @@
+html {
+	box-sizing: border-box;
+	user-select: none;
+	@include fluid-type(
+		$baseFontSize * 1px * 1024/1280,
+		$baseFontSize * 1px,
+		$minimumFluidType,
+		$maximumFluidType
+	);
+}
+
+html,
+body {
+	@include size(100%);
+}
+
+body {
+	overflow: hidden;
+	background: $colorSecondary;
+	color: $colorPrimary;
+	font-family: $fontGoogleSans;
+}
+
+*,
+*:before,
+*:after {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	font-weight: normal;
+	margin: 0;
+}
+
+ul,
+ol {
+	margin: 0;
+	padding: 0;
+}
+
+img {
+	display: block;
+}
+
+.split-text-word {
+	white-space: nowrap;
+	display: inline-block;
+}
+
+.site-frame {
+	position: relative;
+	width: 100%;
+	//max-width: calc(100% - #{base-size(90)});
+	max-width: base-size(1130);
+	margin-left: auto;
+	margin-right: auto;
+}

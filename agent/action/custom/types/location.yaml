@@ -1,0 +1,9 @@
+synonym:
+  entities:
+    counter: {}
+    fridge: {}
+    left: {}
+    right: {}
+    shelf: {}
+    table: {}
+  matchType: FUZZY_MATCH

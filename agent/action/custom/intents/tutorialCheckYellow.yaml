@@ -1,0 +1,7 @@
+parameters:
+- name: attribute
+  type:
+    name: color
+- name: position
+  type:
+    name: position

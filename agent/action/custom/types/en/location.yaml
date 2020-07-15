@@ -1,0 +1,22 @@
+synonym:
+  entities:
+    counter:
+      synonyms:
+      - counter
+    fridge:
+      synonyms:
+      - fridge
+      - refridgerator
+    left:
+      synonyms:
+      - left
+    right:
+      synonyms:
+      - right
+    shelf:
+      synonyms:
+      - shelf
+      - shelves
+    table:
+      synonyms:
+      - table

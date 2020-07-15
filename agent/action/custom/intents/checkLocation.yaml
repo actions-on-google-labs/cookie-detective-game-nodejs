@@ -1,0 +1,4 @@
+parameters:
+- name: location
+  type:
+    name: location

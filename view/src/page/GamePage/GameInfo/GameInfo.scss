@@ -1,0 +1,22 @@
+.game-info {
+	display: flex;
+	align-items: center;
+	perspective: $perspective;
+	overflow: hidden;
+}
+
+.mask {
+	top: -50%;
+	height: 200%;
+	background-color: rgba(black, 0.8);
+}
+
+.info-container {
+	display: flex;
+	justify-content: space-between;
+	max-width: base-size(1040);
+}
+
+.info-item {
+	width: calc((100% / 3) - (#{base-size(55) * (2 / 3)}));
+}

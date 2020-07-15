@@ -1,0 +1,31 @@
+// Fonts
+$fontKanit: Kanit, sans-serif;
+$fontGoogleSans: Google Sans;
+
+$extraBoldFontWeight: 800;
+
+// Z Index
+$zLayout: default, topLayerConfetti, splash-view, loader;
+
+// Sizes
+$baseFontSize: 16;
+$minimumFluidType: 1024px;
+$maximumFluidType: 1280px;
+
+$nestHubBarHeight: 96px;
+$nestHubMaxBarHeight: 120px;
+
+// Colors
+$colorPrimary: #694267;
+$colorSecondary: #f4dab8;
+$colorTertiary: #ff9b45;
+$colorQuaternary: #68c6fe;
+$colorQuinary: #ff2d6f;
+
+$perspective: 1280px;
+
+// $mediaQueries
+@import '../../../data/mediaQueries.json';
+
+// Paths
+$pathComponentImage: 'static/image';

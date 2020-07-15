@@ -1,0 +1,11 @@
+intentEvents:
+- handler:
+    webhookHandler: intent
+  intent: chooseHidingModeAuto
+  transitionToScene: game
+- handler:
+    webhookHandler: intent
+  intent: chooseHidingModeUser
+  transitionToScene: game
+onEnter:
+  webhookHandler: scene

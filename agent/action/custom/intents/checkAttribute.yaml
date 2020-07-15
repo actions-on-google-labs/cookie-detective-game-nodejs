@@ -1,0 +1,4 @@
+parameters:
+- name: attribute
+  type:
+    name: attribute

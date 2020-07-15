@@ -1,0 +1,16 @@
+localizedSettings:
+  developerEmail: lnicholls@google.com
+  developerName: Google
+  displayName: Cookie Detective
+  fullDescription: |-
+    Have your kids become kitchen sleuths as they locate their cookie friend under 10 guesses using deductive reasoning. After cracking the case, do the celebratory cookie dance before journeying to harder levels in space and under the sea.
+
+    We created this new game for your Google Assistant Smart Displays to keep your family members entertained at home.
+  privacyPolicyUrl: https://www.google.com/policies/privacy/
+  pronunciation: Cookie Detective
+  sampleInvocations:
+  - Talk to Cookie Detective
+  shortDescription: Detective, find that cookie and celebrate with a cookie dance.
+  smallLogoImage: https://lh3.googleusercontent.com/AR7dd6o3tqBI9A0NYaURD_pxkfJ0fQ5teRsNqQgHtxGCMWKUSnR5w7fJXysAIg9Ta_YFwyHaf0EfaQ
+  termsOfServiceUrl: https://www.google.com/policies/terms
+  voice: male_1

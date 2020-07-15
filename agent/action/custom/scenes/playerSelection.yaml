@@ -1,0 +1,9 @@
+intentEvents:
+- handler:
+    webhookHandler: intent
+  intent: selectExistingPlayer
+- handler:
+    webhookHandler: intent
+  intent: selectNewPlayer
+onEnter:
+  webhookHandler: scene

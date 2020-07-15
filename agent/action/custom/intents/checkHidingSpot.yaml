@@ -1,0 +1,10 @@
+parameters:
+- name: hidingSpot
+  type:
+    name: hidingSpot
+- name: position
+  type:
+    name: position
+- name: location
+  type:
+    name: location

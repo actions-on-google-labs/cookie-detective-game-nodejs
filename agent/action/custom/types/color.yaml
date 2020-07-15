@@ -1,0 +1,27 @@
+synonym:
+  entities:
+    aquamarine: {}
+    black: {}
+    blue: {}
+    brown: {}
+    cyan: {}
+    gray: {}
+    green: {}
+    indigo: {}
+    lime: {}
+    magenta: {}
+    maroon: {}
+    navy: {}
+    olive: {}
+    orange: {}
+    pink: {}
+    purple: {}
+    red: {}
+    silver: {}
+    tan: {}
+    teal: {}
+    turquoise: {}
+    violet: {}
+    white: {}
+    yellow: {}
+  matchType: FUZZY_MATCH

@@ -1,0 +1,19 @@
+intentEvents:
+- handler:
+    webhookHandler: intent
+  intent: tutorialCheckYellow
+- handler:
+    webhookHandler: intent
+  intent: tutorialCheckJar
+- handler:
+    webhookHandler: intent
+  intent: tutorialCheckBowls
+- handler:
+    webhookHandler: intent
+  intent: tutorialCheckCupboard
+- handler:
+    webhookHandler: intent
+  intent: finishTutorial
+  transitionToScene: colorSelection
+onEnter:
+  webhookHandler: scene

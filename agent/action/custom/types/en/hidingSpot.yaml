@@ -1,0 +1,101 @@
+synonym:
+  entities:
+    blue tin:
+      synonyms:
+      - blue tin
+      - blue box
+      - blue drum
+      - cookie tin
+      - cookie drum
+      - tin
+      - drum
+      - box
+    bowls:
+      synonyms:
+      - bowls
+      - bowl
+    carrots:
+      synonyms:
+      - carrots
+    coffee cups:
+      synonyms:
+      - coffee cups
+      - coffee mugs
+    cookbooks:
+      synonyms:
+      - cookbooks
+      - books
+      - recipe books
+    cookie jar:
+      synonyms:
+      - cookie jar
+    cupboard:
+      synonyms:
+      - cupboard
+    cups:
+      synonyms:
+      - cups
+      - cup
+      - mugs
+      - mug
+    dish towel:
+      synonyms:
+      - dish towel
+      - dish cloth
+      - dishcloth
+      - towel
+    drawer:
+      synonyms:
+      - drawer
+    freezer:
+      synonyms:
+      - freezer
+    fridge:
+      synonyms:
+      - fridge
+      - refridgerator
+    fruit bowl:
+      synonyms:
+      - fruit bowl
+      - fruit
+    jars:
+      synonyms:
+      - jars
+      - jar
+    ketchup bottle:
+      synonyms:
+      - ketchup bottle
+      - ketchup
+      - red bottle
+    life saver:
+      synonyms:
+      - life saver
+    mustard bottle:
+      synonyms:
+      - mustard bottle
+      - yellow bottle
+      - mustard
+    pepper mill:
+      synonyms:
+      - pepper mill
+      - pepper
+      - pepper grinder
+    pink flower:
+      synonyms:
+      - pink flower
+      - pink flowers
+    plant:
+      synonyms:
+      - plant
+    plates:
+      synonyms:
+      - plates
+      - plate
+    salt shaker:
+      synonyms:
+      - salt shaker
+      - salt
+    yellow flower:
+      synonyms:
+      - yellow flower
+      - yellow flowers

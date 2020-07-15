@@ -1,0 +1,9 @@
+intentEvents:
+- handler:
+    webhookHandler: intent
+  intent: confirmSamePlayer
+- handler:
+    webhookHandler: intent
+  intent: notSamePlayer
+onEnter:
+  webhookHandler: scene

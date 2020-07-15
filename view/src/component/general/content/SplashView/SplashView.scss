@@ -1,0 +1,20 @@
+.splash-view {
+	position: absolute;
+	@include offset(0, 0);
+	@include size(100%);
+	z-index: zindex($zLayout, splash-view);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.logo {
+	@include size(base-size(770), base-size(314));
+	background: url(../../../../asset/image/logo.png) no-repeat center center;
+	background-size: contain;
+}
+
+.loader {
+	margin-top: base-size(30);
+}

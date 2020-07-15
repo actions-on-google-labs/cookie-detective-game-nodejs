@@ -1,0 +1,30 @@
+.button {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	border-radius: 0;
+	position: relative;
+	display: inline-block;
+	background: transparent;
+	outline: 0;
+	text-decoration: none;
+	color: currentColor;
+	cursor: pointer;
+	overflow: visible;
+	text-align: center;
+	-webkit-tap-highlight-color: transparent;
+	user-select: none;
+
+	&.is-disabled {
+		cursor: default;
+		pointer-events: none;
+	}
+
+	.is-submitting & {
+		pointer-events: none;
+	}
+
+	&:focus {
+		outline: 0;
+	}
+}

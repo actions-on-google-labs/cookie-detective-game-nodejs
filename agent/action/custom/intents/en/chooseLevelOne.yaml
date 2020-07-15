@@ -1,0 +1,5 @@
+trainingPhrases:
+- home
+- ($number1 'one' auto=true)
+- level ($number1 'one' auto=true)
+- home kitchen

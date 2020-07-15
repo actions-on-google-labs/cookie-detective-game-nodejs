@@ -1,0 +1,72 @@
+.app {
+	position: absolute;
+	@include size(100%);
+	@include offset(0, 0);
+
+	/*
+	&.nest-hub {
+		height: calc(100% - #{$nestHubBarHeight});
+		top: $nestHubBarHeight;
+	}
+
+	&.emulator,
+	&.nest-hub-max {
+		height: calc(100% - #{$nestHubMaxBarHeight});
+		top: $nestHubMaxBarHeight;
+	}
+	 */
+}
+
+.page {
+	position: absolute;
+	@include offset(0, 0);
+	@include size(100%);
+}
+
+.top-layer-confetti {
+	z-index: zindex($zLayout, topLayerConfetti);
+}
+
+.floor {
+	position: absolute;
+	@include position(auto, auto, 0, 0);
+	@include aspect-ratio(1280, 398, false);
+	width: 100%;
+	background: url(../asset/image/background/confetti-floor.png) no-repeat center bottom;
+	background-size: contain;
+}
+
+.version {
+	position: absolute;
+	bottom: 1vh;
+	right: 1vh;
+	background: black;
+	padding: 1vh;
+	font-family: 'Trebuchet MS', Arial, sans-serif;
+	z-index: 999;
+	border-radius: 1vh;
+	color: white;
+}
+
+.top-bar {
+	position: fixed;
+	@include offset(0, 0);
+	background-color: $colorTertiary;
+	width: 100%;
+
+	&.nest-hub {
+		height: $nestHubBarHeight;
+	}
+
+	&.nest-hub-max {
+		height: $nestHubMaxBarHeight;
+	}
+}
+
+.loader {
+	position: absolute;
+	bottom: 2.4rem;
+	left: 2.4rem;
+	right: auto;
+	top: auto;
+}

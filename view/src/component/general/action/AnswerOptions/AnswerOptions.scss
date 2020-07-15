@@ -1,0 +1,8 @@
+.answer-options {
+	white-space: nowrap;
+}
+.button {
+	&:not(:first-child) {
+		margin-left: base-size(30);
+	}
+}

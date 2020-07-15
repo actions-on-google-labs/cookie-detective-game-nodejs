@@ -1,0 +1,6 @@
+trainingPhrases:
+- space
+- ($number1 'two' auto=true)
+- level ($number1 'two' auto=true)
+- space kitchen
+- space station

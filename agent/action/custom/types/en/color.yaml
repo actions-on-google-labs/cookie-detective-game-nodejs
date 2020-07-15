@@ -1,0 +1,74 @@
+synonym:
+  entities:
+    aquamarine:
+      synonyms:
+      - aquamarine
+    black:
+      synonyms:
+      - black
+    blue:
+      synonyms:
+      - blue
+    brown:
+      synonyms:
+      - brown
+    cyan:
+      synonyms:
+      - cyan
+    gray:
+      synonyms:
+      - gray
+    green:
+      synonyms:
+      - green
+    indigo:
+      synonyms:
+      - indigo
+    lime:
+      synonyms:
+      - lime
+    magenta:
+      synonyms:
+      - magenta
+    maroon:
+      synonyms:
+      - maroon
+    navy:
+      synonyms:
+      - navy
+    olive:
+      synonyms:
+      - olive
+    orange:
+      synonyms:
+      - orange
+    pink:
+      synonyms:
+      - pink
+    purple:
+      synonyms:
+      - purple
+    red:
+      synonyms:
+      - red
+    silver:
+      synonyms:
+      - silver
+    tan:
+      synonyms:
+      - tan
+    teal:
+      synonyms:
+      - teal
+    turquoise:
+      synonyms:
+      - turquoise
+    violet:
+      synonyms:
+      - violet
+    white:
+      synonyms:
+      - white
+    yellow:
+      synonyms:
+      - yellow

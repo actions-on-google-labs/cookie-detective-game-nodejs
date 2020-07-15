@@ -1,0 +1,20 @@
+synonym:
+  entities:
+    behind the:
+      synonyms:
+      - behind the
+      - behind a
+    in the:
+      synonyms:
+      - in the
+      - in a
+      - inside the
+      - inside a
+    on top of the:
+      synonyms:
+      - on top of the
+      - on top of a
+    under the:
+      synonyms:
+      - under the
+      - under a

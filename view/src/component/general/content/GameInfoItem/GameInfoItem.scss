@@ -1,0 +1,37 @@
+.game-info-item {
+	position: relative;
+	color: white;
+	text-align: center;
+	box-shadow: 0 base-size(7) base-size(1) #e3dddd, 0 base-size(7) base-size(12) rgba(#000, 0.33),
+		0 base-size(20) base-size(42) rgba(#000, 0.51);
+	border-radius: 8px;
+	background-color: white;
+	padding: base-size(50) base-size(25);
+	height: auto;
+}
+
+.visual {
+	border-radius: 100%;
+	width: 70%;
+	background-color: #f0ecf0;
+	@include aspect-ratio(1, 1);
+	margin: 0 auto;
+
+	.visual-item {
+		position: absolute;
+	}
+}
+
+.choice-visual {
+	background-image: url(../../../../asset/image/choice-visual.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	@include size(base-size(145), base-size(141));
+}
+
+.description {
+	color: $colorPrimary;
+	margin-bottom: base-size(25);
+	font-family: $fontKanit;
+	font-weight: $extraBoldFontWeight;
+}

@@ -1,0 +1,10 @@
+parameters:
+- name: level
+  type:
+    name: actions.type.Number
+- name: questions
+  type:
+    name: actions.type.Number
+- name: seconds
+  type:
+    name: actions.type.Number

@@ -1,0 +1,4 @@
+synonym:
+  entities:
+    food: {}
+  matchType: FUZZY_MATCH

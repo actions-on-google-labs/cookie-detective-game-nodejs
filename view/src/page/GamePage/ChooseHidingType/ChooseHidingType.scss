@@ -1,0 +1,23 @@
+.cta-holder {
+	position: absolute;
+	@include position(auto, base-size(30), base-size(22), auto);
+}
+
+.character-animation {
+	position: absolute;
+	@include offset(0, 50%);
+	transform: translateY(-50%);
+	@include size(base-size(280 * 0.8), base-size(450 * 0.8));
+}
+
+.speech-bubble {
+	position: absolute;
+	@include offset(base-size(175), 35%);
+	max-width: base-size(540);
+}
+
+.button {
+	&:not(:first-child) {
+		margin-left: base-size(30);
+	}
+}

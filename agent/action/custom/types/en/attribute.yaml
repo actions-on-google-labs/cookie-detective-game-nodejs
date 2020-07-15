@@ -1,0 +1,41 @@
+synonym:
+  entities:
+    big:
+      synonyms:
+      - big
+      - roomy
+    black:
+      synonyms:
+      - black
+    blue:
+      synonyms:
+      - blue
+    cold:
+      synonyms:
+      - cold
+    dark:
+      synonyms:
+      - dark
+    green:
+      synonyms:
+      - green
+    high:
+      synonyms:
+      - high
+    orange:
+      synonyms:
+      - orange
+    pink:
+      synonyms:
+      - pink
+    small:
+      synonyms:
+      - small
+      - cramped
+      - tight
+    white:
+      synonyms:
+      - white
+    yellow:
+      synonyms:
+      - yellow

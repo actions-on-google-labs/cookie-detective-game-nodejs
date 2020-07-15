@@ -1,0 +1,10 @@
+intentEvents:
+- handler:
+    webhookHandler: intent
+  intent: chooseAnimal
+- handler:
+    webhookHandler: intent
+  intent: createPlayer
+  transitionToScene: levelSelection
+onEnter:
+  webhookHandler: scene

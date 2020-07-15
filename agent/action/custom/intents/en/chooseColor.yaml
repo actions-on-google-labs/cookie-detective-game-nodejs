@@ -1,0 +1,10 @@
+trainingPhrases:
+- it's ($color 'green' auto=false)
+- i like ($color 'black' auto=true)
+- ($color 'white' auto=false) is my favorite
+- ($color 'purple' auto=false) is my favorite color
+- my favorite color is ($color 'yellow' auto=false)
+- i want ($color 'pink' auto=false)
+- ($color 'blue' auto=true), please
+- ($color 'green' auto=false)
+- ($color 'red' auto=false)

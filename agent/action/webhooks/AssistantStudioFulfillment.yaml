@@ -1,0 +1,10 @@
+handlers:
+- name: start
+- name: intent
+- name: scene
+- name: openMic
+- name: noMatch
+- name: noInput
+httpsEndpoint:
+  baseUrl: https://us-central1-cookie-detective.cloudfunctions.net/v1/webhook
+  endpointApiVersion: 2

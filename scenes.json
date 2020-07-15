@@ -1,0 +1,21 @@
+{
+	"playerSelection": {
+	},
+	"colorSelection": {
+		"view": "introduction",
+		"inputs": {
+			"$color": "animalSelection"
+		}
+	},
+	"animalSelection": {
+	},
+	"levelSelection": {
+		"view": "start-menu"
+	},
+	"hidingModeSelection": {
+	},
+	"game": {
+	},
+	"gameEnd": {
+	}
+}

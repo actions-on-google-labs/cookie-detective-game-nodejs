@@ -1,0 +1,5 @@
+synonym:
+  entities:
+    food:
+      synonyms:
+      - food

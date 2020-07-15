@@ -1,0 +1,4 @@
+parameters:
+- name: smell
+  type:
+    name: smell

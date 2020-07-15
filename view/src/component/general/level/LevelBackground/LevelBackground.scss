@@ -1,0 +1,12 @@
+.level-background {
+	@include aspect-ratio(1280, 800, false);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	transform: translate(-50%, -50%);
+}
+
+.background {
+	background-size: contain;
+}

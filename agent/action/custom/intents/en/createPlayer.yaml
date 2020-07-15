@@ -1,0 +1,3 @@
+trainingPhrases:
+- createplayer ($color 'purple' auto=true) ($animal 'duck' auto=true)
+- createplayer ($color 'pink' auto=true) ($animal 'hippo' auto=true)

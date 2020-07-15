@@ -1,0 +1,7 @@
+synonym:
+  entities:
+    behind the: {}
+    in the: {}
+    on top of the: {}
+    under the: {}
+  matchType: FUZZY_MATCH

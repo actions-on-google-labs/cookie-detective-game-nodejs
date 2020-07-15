@@ -1,0 +1,34 @@
+.refresh-button {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.button {
+	@include size(base-size(91));
+	background: url(../../../asset/image/button/circle-button.png) no-repeat center center;
+	background-size: cover;
+	border-radius: 100%;
+
+	&:before {
+		position: absolute;
+		content: '';
+		@include size(calc(100% - 2px));
+		@include offset(1px, 1px);
+		box-shadow: 0 base-size(2) base-size(2) 0 rgba(#58490d, 0.2),
+			0 base-size(6) base-size(11.52) base-size(0.48) rgba(#4a2100, 0.25),
+			0 base-size(16) base-size(30.72) base-size(1.28) rgba(#4a2100, 0.16);
+		border-radius: inherit;
+	}
+}
+
+.icon {
+	color: white;
+	@include size(base-size(34), base-size(32));
+
+	svg {
+		filter: drop-shadow(0 base-size(2) base-size(2) rgba(#000, 0.11));
+		//filter: drop-shadow(0 base-size(2) base-size(2) rgba(#000000, 0.11), 0 base-size(4) base-size(7) rgba(#000000, 0.64))
+		//filter: drop-shadow(0 base-size(2) base-size(2) 0  rgba(#000000, 0.11), 0 base-size(4) base-size(7) 0  rgba(#000000, 0.64));
+	}
+}

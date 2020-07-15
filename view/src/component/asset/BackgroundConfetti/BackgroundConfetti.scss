@@ -1,0 +1,11 @@
+.background-confetti {
+	position: fixed;
+	pointer-events: none;
+	@include offset(0, 0);
+	@include size(100%);
+	overflow: hidden;
+
+	canvas {
+		@include size(100%);
+	}
+}

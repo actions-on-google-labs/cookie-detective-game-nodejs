@@ -1,0 +1,6 @@
+trainingPhrases:
+- I'm ($color 'acquamarine' auto=true) ($animal 'hyena' auto=true)
+- ($color 'teal' auto=true) ($animal 'panda' auto=true)
+- ($color 'blue' auto=true) ($animal 'tiger' auto=true)
+- ($color 'red' auto=true) ($animal 'dragon' auto=true)
+- ($color 'pink' auto=true) ($animal 'hippo' auto=true)

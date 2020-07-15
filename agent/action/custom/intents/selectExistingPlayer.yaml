@@ -1,0 +1,7 @@
+parameters:
+- name: color
+  type:
+    name: color
+- name: animal
+  type:
+    name: animal

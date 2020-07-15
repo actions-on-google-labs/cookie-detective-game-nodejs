@@ -1,0 +1,4 @@
+trainingPhrases:
+- do you ($attribute1 'smell' auto=false) ($smell 'food' auto=false)?
+- does it ($attribute1 'smell' auto=false) like ($smell 'food' auto=false) there?
+- does it ($attribute1 'smell' auto=false) like ($smell 'food' auto=false)?

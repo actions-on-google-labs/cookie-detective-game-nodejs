@@ -1,0 +1,33 @@
+.title-stroke {
+	-webkit-text-stroke-width: 3px;
+	-webkit-text-stroke-color: white;
+	text-shadow: 0 base-size(8) base-size(6) rgba(#e1ae6a, 0.5),
+		0 base-size(15) base-size(19) rgba(#e1ae6a, 0.5);
+}
+
+.heading-01 {
+	font-size: base-size(75);
+	line-height: em-size(75, 75);
+	font-weight: font-weight(black);
+	font-family: $fontKanit;
+	text-transform: uppercase;
+	letter-spacing: 0.002em;
+}
+
+.heading-02 {
+	font-size: base-size(60);
+	line-height: em-size(60, 60);
+	font-weight: font-weight(black);
+	font-family: $fontKanit;
+	text-transform: uppercase;
+	letter-spacing: 0.002em;
+}
+
+.heading-03 {
+	font-size: base-size(32);
+	line-height: em-size(32, 32);
+	font-weight: $extraBoldFontWeight;
+	font-family: $fontKanit;
+	text-transform: uppercase;
+	letter-spacing: 0.002em;
+}

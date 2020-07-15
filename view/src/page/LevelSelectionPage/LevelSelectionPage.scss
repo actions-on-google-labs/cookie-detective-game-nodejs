@@ -1,0 +1,27 @@
+.level-selection-page {
+	display: flex;
+	align-items: center;
+	text-align: center;
+	opacity: 0;
+}
+
+.content-frame {
+	max-width: base-size(1030);
+	// padding-bottom: base-size(60);
+	z-index: 1;
+}
+
+.title {
+	position: relative;
+}
+
+.card-container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: base-size(80);
+	perspective: $perspective;
+}
+
+.card {
+	width: calc((100% / 3) - (#{base-size(40) * (2 / 3)}));
+}

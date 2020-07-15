@@ -1,0 +1,7 @@
+trainingPhrases:
+- are you on the ($location 'table' auto=false)
+- are you on the ($location 'left' auto=false)
+- are you on a ($location 'shelf' auto=false)
+- are you on a ($location 'counter' auto=false)
+- is it on the ($location 'fridge' auto=false)
+- is it on the ($location 'right' auto=false)

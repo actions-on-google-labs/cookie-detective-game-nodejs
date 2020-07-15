@@ -1,0 +1,15 @@
+synonym:
+  entities:
+    big: {}
+    black: {}
+    blue: {}
+    cold: {}
+    dark: {}
+    green: {}
+    high: {}
+    orange: {}
+    pink: {}
+    small: {}
+    white: {}
+    yellow: {}
+  matchType: FUZZY_MATCH

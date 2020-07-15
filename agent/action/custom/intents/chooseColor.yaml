@@ -1,0 +1,4 @@
+parameters:
+- name: color
+  type:
+    name: color

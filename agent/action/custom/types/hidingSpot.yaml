@@ -1,0 +1,26 @@
+synonym:
+  entities:
+    blue tin: {}
+    bowls: {}
+    carrots: {}
+    coffee cups: {}
+    cookbooks: {}
+    cookie jar: {}
+    cupboard: {}
+    cups: {}
+    dish towel: {}
+    drawer: {}
+    freezer: {}
+    fridge: {}
+    fruit bowl: {}
+    jars: {}
+    ketchup bottle: {}
+    life saver: {}
+    mustard bottle: {}
+    pepper mill: {}
+    pink flower: {}
+    plant: {}
+    plates: {}
+    salt shaker: {}
+    yellow flower: {}
+  matchType: EXACT_MATCH

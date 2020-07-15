@@ -1,0 +1,4 @@
+parameters:
+- name: animal
+  type:
+    name: animal

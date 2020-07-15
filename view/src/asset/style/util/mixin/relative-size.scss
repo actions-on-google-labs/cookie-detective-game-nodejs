@@ -1,0 +1,5 @@
+@mixin relative-size($width: 0, $height: 0) {
+	$designWidth: 1280;
+	$designHeight: 800;
+	@include size($width/$designWidth * 100%, $height/$designHeight * 100%);
+}

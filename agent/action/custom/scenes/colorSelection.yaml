@@ -1,0 +1,7 @@
+intentEvents:
+- handler:
+    webhookHandler: intent
+  intent: chooseColor
+  transitionToScene: animalSelection
+onEnter:
+  webhookHandler: scene

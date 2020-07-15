@@ -1,0 +1,24 @@
+.primary-text-reveal {
+	position: relative;
+
+	//a {
+	//  position: relative;
+	//  display: inline-block;
+	//  text-decoration: none;
+	//
+	//  &:after {
+	//    position: absolute;
+	//    content: '';
+	//    @include position(auto, auto, 2px, 0);
+	//    background-color: currentColor;
+	//    @include size(0%, 1px);
+	//    transition: width 800ms $easeOutExpo;
+	//  }
+	//
+	//  @include hover() {
+	//    &:after {
+	//      width: 100%;
+	//    }
+	//  }
+	//}
+}

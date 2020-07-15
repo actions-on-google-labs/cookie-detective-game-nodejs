@@ -1,0 +1,7 @@
+trainingPhrases:
+- ($animal 'dinosaur' auto=true)
+- an ($animal 'elephant' auto=false)
+- i want to be an ($animal 'ibex' auto=false)
+- a ($animal 'blobfish' auto=false) please
+- i'm a ($animal 'dolphin' auto=false)
+- ($animal 'frog' auto=false)

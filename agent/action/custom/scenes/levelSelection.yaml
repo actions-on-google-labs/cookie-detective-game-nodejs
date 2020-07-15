@@ -1,0 +1,16 @@
+intentEvents:
+- handler:
+    webhookHandler: intent
+  intent: chooseLevelOne
+- handler:
+    webhookHandler: intent
+  intent: chooseLevelTwo
+- handler:
+    webhookHandler: intent
+  intent: chooseLevelThree
+- handler:
+    webhookHandler: intent
+  intent: continueToHidingModeSelection
+  transitionToScene: hidingModeSelection
+onEnter:
+  webhookHandler: scene

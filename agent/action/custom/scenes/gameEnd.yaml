@@ -1,0 +1,20 @@
+intentEvents:
+- handler:
+    webhookHandler: intent
+  intent: tryAgain
+- handler:
+    webhookHandler: intent
+  intent: selectNextLevel
+- handler:
+    webhookHandler: intent
+  intent: confirmGameEndQuestion
+- handler:
+    webhookHandler: intent
+  intent: returnToLevelSelection
+  transitionToScene: levelSelection
+- handler:
+    webhookHandler: intent
+  intent: continueToHidingModeSelection
+  transitionToScene: hidingModeSelection
+onEnter:
+  webhookHandler: scene

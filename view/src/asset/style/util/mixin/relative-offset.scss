@@ -1,0 +1,5 @@
+@mixin relative-offset($x: 0, $y: 0) {
+	$designWidth: 1280;
+	$designHeight: 800;
+	@include offset($x/$designWidth * 100%, $y/$designHeight * 100%);
+}

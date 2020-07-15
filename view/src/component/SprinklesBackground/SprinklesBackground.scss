@@ -1,0 +1,15 @@
+/* stylelint-disable-next-line block-no-empty */
+.sprinkles-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	@include size(100%);
+
+	video {
+		position: relative;
+		top: 0;
+		left: 0;
+		@include size(100%);
+		object-fit: cover;
+	}
+}
