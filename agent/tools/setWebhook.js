@@ -1,4 +1,20 @@
-#!/usr/bin/node
+/**
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+//#!/usr/bin/node
 const fs = require('fs');
 const cp = require('child_process');
 const path = require('path');
@@ -19,7 +35,7 @@ const ENV_MAP = {
 };
 
 const projectId = fs
-	.readFileSync(path.resolve(__dirname, '../PROJECT_ID'))
+	.readFileSync(path.resolve(__dirname, '../../PROJECT_ID'))
 	.toString()
 	.trim();
 
@@ -39,8 +55,7 @@ console.log('Pulling agent config...');
 rimraf.sync(tempDir);
 mkdirp.sync(tempDir);
 
-const gactions = path.resolve(__dirname, './gactions');
-cp.execSync(`${gactions} pull --projectId ${projectId}`, { cwd: tempDir });
+cp.execSync(`gactions pull --project-id ${projectId}`, { cwd: tempDir });
 
 const webhookConfigFile = path.resolve(__dirname, '_temp/webhooks/AssistantStudioFulfillment.yaml');
 const webhookConfigContent = fs.readFileSync(webhookConfigFile, 'utf8');
@@ -55,7 +70,7 @@ if (webhookConfig.httpsEndpoint.baseUrl === webhookUrl) {
 
 	// eslint-disable-next-line no-console
 	console.log('Pushing agent config...');
-	cp.execSync(`${gactions} push`, { cwd: tempDir });
+	cp.execSync(`gactions push`, { cwd: tempDir });
 
 	// eslint-disable-next-line no-console
 	console.log(`Webhook URL set to "${webhookUrl}" (${env})`);

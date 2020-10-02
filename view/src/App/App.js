@@ -1,190 +1,247 @@
+/**
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import Vue from 'vue';
-import { DeviceStateEvent } from 'seng-device-state-tracker';
-import { FlowManager, AbstractRegistrableComponent } from 'vue-transition-component';
-import { mapMutations, mapState } from 'vuex';
-import { AppMutations } from '../store/module/app';
-import BackgroundConfetti from '../component/asset/BackgroundConfetti/BackgroundConfetti';
-import SprinklesBackground from '../component/SprinklesBackground/SprinklesBackground';
+import {DeviceStateEvent} from 'seng-device-state-tracker';
+import {
+  FlowManager,
+  AbstractRegistrableComponent,
+} from 'vue-transition-component';
+import {mapMutations, mapState} from 'vuex';
+import {AppMutations} from '../store/module/app';
+import BackgroundConfetti
+  from '../component/asset/BackgroundConfetti/BackgroundConfetti';
+import SprinklesBackground
+  from '../component/SprinklesBackground/SprinklesBackground';
 import Loader from '../component/asset/Loader/Loader';
-import { version } from '../../package.json';
+import {version} from '../../package.json';
 import scenes from '../data/scenes.json';
-import { images, videos } from '../data/assets';
-import { lottieAnimations } from '../data/lottieAnimations';
+import {images, videos} from '../data/assets';
+import {lottieAnimations} from '../data/lottieAnimations';
 import SplashView from '../component/general/content/SplashView/SplashView';
 import AppTransitionController from './AppTransitionController';
-import { RouteNames } from '../router/routes';
-import { sceneDataMixin } from '../mixins/sceneDataMixin';
+import {RouteNames} from '../router/routes';
+import {sceneDataMixin} from '../mixins/sceneDataMixin';
 import copy from '../data/locale/en-gb.json';
 
 export default {
-	name: 'App',
-	components: {
-		Loader,
-		BackgroundConfetti,
-		SplashView,
-		SprinklesBackground,
-	},
-	mixins: [sceneDataMixin()],
-	extends: AbstractRegistrableComponent,
-	data() {
-		return {
-			topLayerConfettiAmount: Math.round(window.innerWidth / 80),
-			applicationLoaded: false,
-			applicationLoadProgress: 0,
-		};
-	},
-	computed: {
-		...mapState({
-			deviceState: state => state.app.deviceState,
-			webhookVersion: state => state.app.webhookVersion,
-			scene: state => state.app.scene,
-		}),
-		version() {
-			return `${this.$platform} / ${process.env.NODE_ENV} / v${version} / v${this.webhookVersion}`;
-		},
-		userAgent() {
-			return navigator.userAgent;
-		},
-		isDev() {
-			return process.env.NODE_ENV !== 'production';
-		},
-	},
-	watch: {
-		scene(newScene) {
-			this.updateScene(newScene);
-		},
-	},
-	mounted() {
-		if (this.$isBrowser && this.$route.name !== RouteNames.MAIN) {
-			const scene = Object.keys(scenes).find(key => scenes[key].route === this.$route.name);
-			if (scene) {
-				this.setSceneInBrowser(scene);
-				return;
-			}
-		}
-		this.updateScene(this.scene);
-	},
-	created() {
-		this.$deviceStateTracker.addEventListener(
-			DeviceStateEvent.STATE_UPDATE,
-			this.handleDeviceStateUpdate,
-		);
-		this.setDeviceState(this.$deviceStateTracker.currentState);
+  name: 'App',
+  components: {
+    Loader,
+    BackgroundConfetti,
+    SplashView,
+    SprinklesBackground,
+  },
+  mixins: [sceneDataMixin()],
+  extends: AbstractRegistrableComponent,
+  data() {
+    return {
+      topLayerConfettiAmount: Math.round(window.innerWidth / 80),
+      applicationLoaded: false,
+      applicationLoadProgress: 0,
+    };
+  },
+  computed: {
+    ...mapState({
+      deviceState: (state) => state.app.deviceState,
+      webhookVersion: (state) => state.app.webhookVersion,
+      scene: (state) => state.app.scene,
+      isMobile: (state) => state.app.isMobile,
+    }),
+    version() {
+      return `${
+        this.$platform
+      } / ${
+        process.env.NODE_ENV
+      } / v${
+        version
+      } / v${
+        this.webhookVersion
+      }`;
+    },
+    userAgent() {
+      return navigator.userAgent;
+    },
+    isDev() {
+      return process.env.NODE_ENV !== 'production';
+    },
+  },
+  watch: {
+    scene(newScene) {
+      this.updateScene(newScene);
+    },
+  },
+  mounted() {
+    if (this.$isBrowser && this.$route.name !== RouteNames.MAIN) {
+      const scene = Object.keys(scenes).find(
+          (key) => scenes[key].route === this.$route.name,
+      );
+      if (scene) {
+        this.setSceneInBrowser(scene);
+        return;
+      }
+    }
 
-		// ticket #256
-		// If the user touches the screen, any existing audio playing should be stopped
-		this.shutUpBodyListener = () => this.$shutUp();
-		// the capture is important here, otherwise we cannot start a tts after a click
-		document.body.addEventListener('click', this.shutUpBodyListener, { capture: true });
+    this.updateScene(this.scene);
+  },
+  created() {
+    this.$deviceStateTracker.addEventListener(
+        DeviceStateEvent.STATE_UPDATE,
+        this.handleDeviceStateUpdate,
+    );
+    this.setDeviceState(this.$deviceStateTracker.currentState);
 
-		this.loadApplication();
-	},
-	beforeDestroy() {
-		document.body.removeEventListener('click', this.shutUpBodyListener, { capture: true });
-	},
-	methods: {
-		async updateScene(scene) {
-			if (!scenes[scene]) return;
+    // If the user touches the screen, any existing
+    // audio playing should be stopped
+    this.shutUpBodyListener = () => this.$shutUp();
+    // the capture is important here, otherwise this listener
+    // will prevent all the tts triggered by other clicks
+    document.body.addEventListener('click', this.shutUpBodyListener, {
+      capture: true,
+    });
 
-			const { route } = scenes[scene];
+    this.loadApplication();
+  },
+  beforeDestroy() {
+    document.body.removeEventListener('click', this.shutUpBodyListener, {
+      capture: true,
+    });
+  },
+  methods: {
+    async updateScene(scene) {
+      if (this.checkIsMobile()) return;
 
-			if (!route || this.$route.name === route) return;
+      if (!scenes[scene]) return;
 
-			return this.$router.push({ name: route });
-		},
+      const {route} = scenes[scene];
 
-		...mapMutations({
-			setDeviceState: AppMutations.SET_DEVICE_STATE,
-		}),
+      if (!route || this.$route.name === route) return;
 
-		loadApplication() {
-			// todo collect all preload asset somewhere else.
-			this.preloadAssets = Object.keys(images).map(key => images[key]);
+      return this.$router.push({name: route});
+    },
 
-			this.preloadAssets = this.preloadAssets.concat(Object.keys(videos).map(key => videos[key]));
+    ...mapMutations({
+      setDeviceState: AppMutations.SET_DEVICE_STATE,
+    }),
 
-			this.$levelModel.getArrayOfItems().forEach(level => {
-				this.preloadAssets.push(level.background);
-				this.preloadAssets.push(level.previewImage);
-			});
+    checkIsMobile() {
+      if (this.isMobile) {
+        this.$router.push({name: RouteNames.DEVICE_NOT_SUPPORTED});
+      }
 
-			this.preloadAssets = this.preloadAssets.concat(lottieAnimations.map(item => item.file));
+      return this.isMobile;
+    },
 
-			const getPhrases = node => {
-				let phrases = [];
-				Object.keys(node).forEach(key => {
-					const value = node[key];
-					if (typeof value === 'string') return phrases.push(value);
-					phrases = phrases.concat(getPhrases(node[key]));
-				});
-				return phrases;
-			};
+    loadApplication() {
+      this.preloadAssets = Object.keys(images).map((key) => images[key]);
 
-			const phrases = Array.from(
-				new Set(getPhrases(copy.voice).filter(phrase => !phrase.match(/<%=/))).values(),
-			);
+      this.preloadAssets = this.preloadAssets.concat(
+          Object.keys(videos).map((key) => videos[key]),
+      );
 
-			this.assetLoaderPromise = this.$assets
-				.load(this.preloadAssets, progress => {
-					this.applicationLoadProgress = Math.round(progress * 50);
-				})
-				.then(() =>
-					this.$preloadVoice(phrases, progress => {
-						this.applicationLoadProgress = 50 + Math.round(progress * 50);
-					}),
-				);
-		},
+      this.$levelModel.getArrayOfItems().forEach((level) => {
+        this.preloadAssets.push(level.background);
+        this.preloadAssets.push(level.previewImage);
+      });
 
-		onLeave(element, done) {
-			FlowManager.transitionOut.then(() => FlowManager.done()).then(done);
-		},
+      this.preloadAssets = this.preloadAssets.concat(
+          lottieAnimations.map((item) => item.file),
+      );
 
-		handleDeviceStateUpdate(event) {
-			this.setDeviceState(event.data.state);
-		},
+      const getPhrases = (node) => {
+        let phrases = [];
+        Object.keys(node).forEach((key) => {
+          const value = node[key];
+          if (typeof value === 'string') return phrases.push(value);
+          phrases = phrases.concat(getPhrases(node[key]));
+        });
+        return phrases;
+      };
 
-		handleSprinklesReady(component) {
-			Vue.prototype.$sprinkles = component;
-		},
+      const phrases = Array.from(
+          new Set(
+              getPhrases(copy.voice).filter((phrase) => !phrase.match(/<%=/)),
+          ).values(),
+      );
 
-		handleLoaderReady(component) {
-			Vue.prototype.$loader = component;
-		},
+      const preload = async () => {
+        await this.$assets.load(this.preloadAssets, (progress) => {
+          this.applicationLoadProgress = Math.round(progress * 50);
+        });
 
-		handleTopLayerConfettiReady(component) {
-			Vue.prototype.$topLayerConffeti = component;
-		},
+        await this.$preloadVoice(phrases, (progress) => {
+          this.applicationLoadProgress = 50 + Math.round(progress * 50);
+        });
 
-		handleApplicationLoaded() {
-			this.splashView.transitionOut().then(() => {
-				this.applicationLoaded = true;
-			});
-		},
+        this.applicationLoadProgress = 100;
+      };
 
-		handleSplashScreenAnimationCompleted() {
-			this.splashScreenAnimationResolver();
-		},
+      this.assetLoaderPromise = preload();
+    },
 
-		async handleAllComponentsReady() {
-			this.splashScreenAnimationCompleted = new Promise(resolve => {
-				this.splashScreenAnimationResolver = resolve;
-			});
+    onLeave(element, done) {
+      FlowManager.transitionOut.then(() => FlowManager.done()).then(done);
+    },
 
-			this.transitionController = new AppTransitionController(this);
-			Vue.prototype.$showFloor = this.transitionController.showFloor.bind(
-				this.transitionController,
-			);
+    handleDeviceStateUpdate(event) {
+      this.setDeviceState(event.data.state);
+    },
 
-			await this.assetLoaderPromise;
-			await this.splashScreenAnimationCompleted;
-			this.handleApplicationLoaded();
-		},
+    handleSprinklesReady(component) {
+      Vue.prototype.$sprinkles = component;
+    },
 
-		handleSplashViewReady(component) {
-			this.splashView = component;
-			this.splashView.transitionIn();
-		},
+    handleLoaderReady(component) {
+      Vue.prototype.$loader = component;
+    },
 
-		handlePageIsReady() {},
-	},
+    handleTopLayerConfettiReady(component) {
+      Vue.prototype.$topLayerConffeti = component;
+    },
+
+    handleApplicationLoaded() {
+      this.splashView.transitionOut().then(() => {
+        this.applicationLoaded = true;
+      });
+    },
+
+    handleSplashScreenAnimationCompleted() {
+      this.splashScreenAnimationResolver();
+    },
+
+    async handleAllComponentsReady() {
+      this.splashScreenAnimationCompleted = new Promise((resolve) => {
+        this.splashScreenAnimationResolver = resolve;
+      });
+
+      this.transitionController = new AppTransitionController(this);
+      Vue.prototype.$showFloor = this.transitionController.showFloor.bind(
+          this.transitionController,
+      );
+
+      await this.assetLoaderPromise;
+      await this.splashScreenAnimationCompleted;
+      this.handleApplicationLoaded();
+    },
+
+    handleSplashViewReady(component) {
+      this.splashView = component;
+      this.splashView.transitionIn();
+    },
+
+    handlePageIsReady() {},
+  },
 };

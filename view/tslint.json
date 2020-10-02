@@ -1,18 +1,7 @@
 {
-	"extends": ["tslint-config-airbnb", "tslint-config-prettier"],
+	"extends": ["tslint-config-google"],
 	"defaultSeverity": "error",
-	"rulesDirectory": ["tslint-plugin-prettier"],
 	"linterOptions": {
 		"exclude": ["./src/vendor/**/*.ts", "./src/lib/webgl/**/*.ts"]
-	},
-	"rules": {
-		"no-debugger": true,
-		"no-console": true,
-		"no-increment-decrement": false,
-		"no-this-assignment": [true, { "allow-destructuring": true }],
-		"prefer-array-literal": [true, { "allow-type-parameters": true }],
-		"variable-name": [true, "allow-leading-underscore"],
-		"strict-boolean-expressions": false,
-		"import-name": false
 	}
 }

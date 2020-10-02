@@ -1,23 +1,22 @@
 {
   "name": "cookie-detective-agent",
-  "version": "1.7.0",
+  "version": "2.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "dev": "PORT=3001 NODE_ENV=development nodemon index.js",
-    "tunnel": "ssh -nNT -R /var/projects/${npm_package_name}-local/dev.sock:localhost:3001 ${npm_package_name}-local@eu.dev.monkapps.com",
-    "build": "rm -rf dist/ && mkdir -p dist && cp -r config scenes lib index.js package.json dist/",
+    "build": "rm -rf dist/ && mkdir -p dist && cp -r config src package.json dist/",
     "deploy": "run-s push deploy:firebase",
     "deploy:firebase": "echo \\\"\\n\\n\\\" | firebase deploy --interactive && node tools/setWebhook.js prod",
-    "pull": "cd action/ && rm -rf * && ../tools/gactions pull --projectId `cat ../PROJECT_ID`",
-    "push": "cd action/ && ../tools/gactions push",
-    "test": "node tools/setWebhook.js dev && yarn push && run-p dev tunnel"
+    "pull": "cd action/ && rm -rf * && gactions pull --project-id `cat ../PROJECT_ID`",
+    "push": "cd action/ && gactions push",
+    "test": "yarn push && node tools/setWebhook.js dev && run-p dev tunnel"
   },
   "dependencies": {
     "@google-cloud/datastore": "^1.4.2",
     "@google-cloud/storage": "^4.7.0",
     "@google-cloud/text-to-speech": "^2.3.0",
-    "actions-on-google": "https://storage.googleapis.com/studio-eap.appspot.com/conversation-v3-session-language-fix-1.tgz",
+    "@assistant/conversation": "^3.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -32,12 +31,10 @@
   "devDependencies": {
     "@firebase/app-types": "0.x",
     "eslint": "^5.12.1",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^2.10.0",
+    "eslint-config-google": "^0.14.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-import-resolver-typescript": "^1.1.1",
-    "eslint-plugin-import": "^2.15.0",
-    "eslint-plugin-prettier": "^2.7.0",
+    "eslint-plugin-import": "^2.22.0",
     "firebase-tools": "^8.1.1",
     "minimist": "^1.2.5",
     "mkdirp": "^1.0.4",
@@ -51,10 +48,9 @@
     "typescript": "^3.8.3"
   },
   "author": {
-    "name": "Richard Heuser",
-    "email": "richard.heuser@mediamonks.com"
+    "name": "Google"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "engines": {
     "node": "10"
   }

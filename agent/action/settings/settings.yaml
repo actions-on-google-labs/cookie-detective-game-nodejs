@@ -1,3 +1,17 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 category: GAMES_AND_TRIVIA
 designedForFamily: true
 enabledRegions:
@@ -213,16 +227,13 @@ enabledRegions:
 - Wallis and Futuna
 - Zambia
 - Zimbabwe
-projectId: cookie-detective
+projectId: {PROJECT_ID}
 surfaceRequirements:
   minimumRequirements:
   - capability: AUDIO_OUTPUT
   - capability: SCREEN_OUTPUT
   - capability: MEDIA_RESPONSE_AUDIO
   - capability: INTERACTIVE_CANVAS
-testingInstructions: |-
-  This is a 1P game which does not require a full review.
-
-  https://ariane.googleplex.com/launch/4009842
+testingInstructions:
 usesHomeStorage: true
 usesInteractiveCanvas: true

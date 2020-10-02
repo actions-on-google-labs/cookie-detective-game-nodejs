@@ -2,8 +2,8 @@
   "name": "cookie-detective",
   "main": "index.js",
   "repository": "",
-  "author": "Richard Heuser <richard.heuser@mediamonks.com>",
-  "license": "MIT",
+  "author": "Google",
+  "license": "Apache-2.0",
   "scripts": {
     "dev": "run-p -l dev:view dev:agent",
     "dev:agent": "cd agent/ && yarn dev",
@@ -20,6 +20,7 @@
     "test:view": "cd view/ && yarn test"
   },
   "devDependencies": {
+    "eslint-config-google": "^0.14.0",
     "npm-run-all": "^4.1.5"
   }
 }

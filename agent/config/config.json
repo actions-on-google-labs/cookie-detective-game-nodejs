@@ -1,10 +1,10 @@
 {
 	"default": {
-		"viewUrl": "https://storage.googleapis.com/cookie-detective/view/index.html",
-		"webhookUrl": "https://us-central1-cookie-detective.cloudfunctions.net/v{VERSION}/webhook"
+		"viewUrl": "",
+		"webhookUrl": "https://us-central1-{PROJECT_ID}.cloudfunctions.net/v{VERSION}/webhook"
 	},
 	"development": {
-		"viewUrl": "https://cookie-detective-view-local.eu.dev.monkapps.com/",
-		"webhookUrl": "https://cookie-detective-agent-local.eu.dev.monkapps.com/webhook"
+		"viewUrl": "",
+		"webhookUrl": ""
 	}
 }

@@ -1,220 +1,300 @@
-import * as uuid from 'uuid';
-import { mapMutations, mapState } from 'vuex';
-import { AppMutations } from '../../store/module/app';
-import { isBrowser } from '../../util/getPlatform';
-import canvas from '../../lib/canvas';
-import BrowserStore from './browserStore';
-import { GameResultModel } from '../../data/model/GameResultModel';
-import { sleep } from '../../util/sleep';
-
 /**
- * This mixin handles the common properties and methods between scenes
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
+import * as uuid from 'uuid';
+import {mapMutations, mapState} from 'vuex';
+import {AppMutations} from '../../store/module/app';
+import {isBrowser} from '../../util/getPlatform';
+import canvas from '../../lib/canvas';
+import createBrowserStore from './browserStore';
+import {GameResultModel} from '../../data/model/GameResultModel';
+
 const Config = {
-	browser: isBrowser(),
-	localStorageEnabled: isBrowser(), // Disabling local storage in the device, because it's not supported there
+  browser: isBrowser(),
+  // Disabling local storage in the device, because it's not supported there
+  localStorageEnabled: isBrowser(),
 };
 
-const browserStore = BrowserStore({
-	localStorageEnabled: Config.localStorageEnabled,
+const browserStore = createBrowserStore({
+  localStorageEnabled: Config.localStorageEnabled,
 });
 
-export const sceneDataMixin = expectedScene => ({
-	computed: {
-		...mapState({
-			userData: state => state.app.userData,
-			sessionData: state => state.app.sessionData,
-			homeData: state => state.app.homeData,
-			scene: state => state.app.scene,
-			sceneInput: state => state.app.input,
-		}),
+/**
+ * This mixin is the main interface between the canvas api and the game
+ * It mainly manages the user storage, and allow seamlessly communication
+ * with the canvas api, using text queries
+ *
+ * each method includes a fallback to also work in the browser,
+ * during development
+ */
 
-		players() {
-			const players = Config.browser ? browserStore.players : this.homeData.players;
+export const sceneDataMixin = (expectedScene) => ({
+  computed: {
+    ...mapState({
+      userData: (state) => state.app.userData,
+      sessionData: (state) => state.app.sessionData,
+      homeData: (state) => state.app.homeData,
+      scene: (state) => state.app.scene,
+      sceneInput: (state) => state.app.input,
+    }),
 
-			if (!players) return [];
+    players() {
+      const players = Config.browser ?
+        browserStore.players :
+        this.homeData.players;
 
-			return [...players].sort((a, b) => b.lastPlayed - a.lastPlayed);
-		},
+      if (!players) return [];
 
-		currentPlayer() {
-			if (Config.browser) return browserStore.currentPlayer;
+      return [...players].sort((a, b) => b.lastPlayed - a.lastPlayed);
+    },
 
-			return this.sessionData.currentPlayer;
-		},
+    currentPlayer() {
+      if (Config.browser) return browserStore.currentPlayer;
 
-		currentPlayerUserName() {
-			return `${this.currentPlayer.color} ${this.currentPlayer.animal}`;
-		},
+      return this.sessionData.currentPlayer;
+    },
 
-		isNewPlayer() {
-			return Config.browser ? browserStore.isNewPlayer : this.sessionData.isNewPlayer;
-		},
+    currentPlayerUserName() {
+      return `${this.currentPlayer.color} ${this.currentPlayer.animal}`;
+    },
 
-		gameResults() {
-			const results = Config.browser ? browserStore.gameResults : this.homeData.gameResults;
+    isNewPlayer() {
+      return Config.browser ?
+        browserStore.isNewPlayer :
+        this.sessionData.isNewPlayer;
+    },
 
-			if (!results) return [];
+    gameResults() {
+      const results = Config.browser ?
+        browserStore.gameResults :
+        this.homeData.gameResults;
 
-			return [...results]
-				.sort((a, b) => b.timestamp - a.timestamp)
-				.map(result => new GameResultModel(result));
-		},
+      if (!results) return [];
 
-		gameResultsOrderedByScore() {
-			return [...this.gameResults].sort((a, b) => b.score - a.score);
-		},
+      return [...results]
+          .sort((a, b) => b.timestamp - a.timestamp)
+          .map((result) => new GameResultModel(result));
+    },
 
-		lastGameResult() {
-			return this.gameResults[0]; // the game results are already ordered by timestamp
-		},
+    gameResultsOrderedByScore() {
+      return [...this.gameResults].sort((a, b) => b.score - a.score);
+    },
 
-		currentColor() {
-			return Config.browser ? browserStore.currentColor : this.sessionData.color;
-		},
+    lastGameResult() {
+      // the game results are already ordered by timestamp
+      return this.gameResults[0];
+    },
 
-		currentHidingMode() {
-			return Config.browser ? browserStore.currentHidingMode : this.sessionData.hidingMode;
-		},
+    currentColor() {
+      return Config.browser ?
+        browserStore.currentColor :
+        this.sessionData.color;
+    },
 
-		expectedScene() {
-			return expectedScene;
-		},
-	},
+    currentHidingMode() {
+      return Config.browser ?
+        browserStore.currentHidingMode :
+        this.sessionData.hidingMode;
+    },
 
-	watch: {
-		sceneInput({ input }) {
-			if (!expectedScene) return;
+    expectedScene() {
+      return expectedScene;
+    },
+  },
 
-			if (this.scene !== expectedScene) return;
+  watch: {
+    /**
+     * This is an internal watcher, that triggers the handleVoiceInput method,
+     * in the vue component in case of matched input,
+     * otherwise it triggers the handleVoiceNoMatch method
+     * @private
+     * @param {string} input
+     * @return {*}
+     */
+    sceneInput({input}) {
+      if (!expectedScene) return;
 
-			this.waitingForSceneInput = false;
+      if (this.scene !== expectedScene) return;
 
-			const noMatch =
-				String(input).match(/^(NO_MATCH_|NO_INPUT)/) || !input || input === 'undefined';
+      this.waitingForSceneInput = false;
 
-			if (noMatch && typeof this.handleVoiceNoMatch === 'function') {
-				return this.handleVoiceNoMatch();
-			}
+      const isNoMatch = /^(NO_MATCH_|NO_INPUT)/.test(input);
 
-			if (typeof this.handleVoiceInput === 'function') this.handleVoiceInput(input);
-		},
-	},
+      const noMatch = isNoMatch || !input || input === 'undefined';
 
-	methods: {
-		...mapMutations({
-			setScene: AppMutations.SET_SCENE,
-		}),
+      if (noMatch && typeof this.handleVoiceNoMatch === 'function') {
+        return this.handleVoiceNoMatch();
+      }
 
-		safeSend(text) {
-			if (this.waitingForSceneInput) return;
+      if (typeof this.handleVoiceInput === 'function') {
+        this.handleVoiceInput(input);
+      }
+    },
+  },
 
-			this.waitingForSceneInput = true;
+  methods: {
+    ...mapMutations({
+      setScene: AppMutations.SET_SCENE,
+    }),
 
-			return this.$send(text).catch(err => {
-				if (typeof this.handleTextQueryError === 'function') {
-					this.handleTextQueryError(err);
-				}
+    /**
+     * send a textQuery to the canvas api
+     * This method has an internal check that prevents to send multiple requests
+     * in case the user presses a button that sends a textQuery
+     * multiple times in a short amount of time
+     * @param {string} text
+     * @return {Promise|undefined}
+     */
+    safeSend(text) {
+      if (this.waitingForSceneInput) return;
 
-				this.waitingForSceneInput = false;
-			});
-		},
+      this.waitingForSceneInput = true;
 
-		setSceneInBrowser(scene) {
-			if (!Config.browser) return;
+      return this.$send(text).catch((err) => {
+        if (typeof this.handleTextQueryError === 'function') {
+          this.handleTextQueryError(err);
+        }
 
-			this.setScene(scene);
-		},
+        this.waitingForSceneInput = false;
+      });
+    },
 
-		getPlayerById(id) {
-			return this.players.find(player => player.id === id);
-		},
+    /**
+     * set a scene manually in the browser,
+     * when the canvas api is not available
+     * @param {string} scene
+     */
+    setSceneInBrowser(scene) {
+      if (!Config.browser) return;
 
-		saveGameResult({ level, questionsUsed, secondsUsed }) {
-			if (!Config.browser) {
-				canvas.sendText(`savegameresult ${level.ordinal} ${questionsUsed} ${secondsUsed}`);
-				return;
-			}
+      this.setScene(scene);
+    },
 
-			const newResult = {
-				id: uuid.v4(),
-				questionsUsed,
-				secondsUsed,
-				level: level.ordinal,
-				playerId: this.currentPlayer.id,
-				timestamp: Date.now(),
-			};
+    getPlayerById(id) {
+      return this.players.find((player) => player.id === id);
+    },
 
-			browserStore.gameResults = [...browserStore.gameResults, newResult];
-		},
+    saveGameResult({level, questionsUsed, secondsUsed, gameOver}) {
+      if (!Config.browser) {
+        const result = gameOver ? 'loss' : 'win';
+        return canvas.sendText(
+            `saveGameResult ${
+              level.ordinal
+            } ${
+              questionsUsed
+            } ${
+              secondsUsed
+            } ${
+              result
+            }`,
+        );
+      }
 
-		selectPlayer({ color, animal }) {
-			if (!Config.browser) return; // in non browser environment, the player selection is handled by the backend
+      const newResult = {
+        id: uuid.v4(),
+        questionsUsed,
+        secondsUsed,
+        level: level.ordinal,
+        playerId: this.currentPlayer.id,
+        timestamp: Date.now(),
+        gameOver,
+      };
 
-			const currentPlayerIndex = browserStore.players.findIndex(
-				player => player.color === color && player.animal === animal,
-			);
+      browserStore.gameResults = [...browserStore.gameResults, newResult];
+    },
 
-			if (currentPlayerIndex < 0)
-				throw new Error(`Trying to select a non existing player. ${color} ${animal}`);
+    selectPlayer({color, animal}) {
+      // in non browser environment, the player selection
+      // is handled by the backend
+      if (!Config.browser) return;
 
-			const currentPlayer = browserStore.players[currentPlayerIndex];
-			browserStore.currentPlayer = currentPlayer;
+      const currentPlayerIndex = browserStore.players.findIndex(
+          (player) => player.color === color && player.animal === animal,
+      );
 
-			currentPlayer.lastPlayed = Date.now();
-			this.$set(browserStore.players, currentPlayerIndex, currentPlayer);
-		},
+      if (currentPlayerIndex < 0) {
+        throw new Error(
+            `Trying to select a non existing player. ${color} ${animal}`,
+        );
+      }
 
-		createPlayer({ color, animal }) {
-			if (!Config.browser) {
-				canvas.sendText(`createplayer ${color} ${animal}`);
-				return;
-			}
+      const currentPlayer = browserStore.players[currentPlayerIndex];
+      browserStore.currentPlayer = currentPlayer;
 
-			const newPlayer = {
-				color,
-				animal,
-				id: uuid.v4(),
-				lastPlayed: Date.now(),
-			};
-			browserStore.players = [...browserStore.players, newPlayer];
-			browserStore.isNewPlayer = true;
-		},
+      currentPlayer.lastPlayed = Date.now();
+      this.$set(browserStore.players, currentPlayerIndex, currentPlayer);
+    },
 
-		selectColor(color) {
-			if (!Config.browser) return;
-			browserStore.currentColor = color;
-		},
+    createPlayer({color, animal}) {
+      if (!Config.browser) {
+        canvas.sendText(`createplayer ${color} ${animal}`);
+        return;
+      }
 
-		selectHidingMode(hidingMode) {
-			if (!Config.browser) return;
-			browserStore.currentHidingMode = hidingMode;
-		},
+      const newPlayer = {
+        color,
+        animal,
+        id: uuid.v4(),
+        lastPlayed: Date.now(),
+      };
+      browserStore.players = [...browserStore.players, newPlayer];
+      browserStore.isNewPlayer = true;
+    },
 
-		getGameResultsPerLevel(level) {
-			return this.gameResults.filter(result => {
-				return result.level === level.ordinal && !!this.getPlayerById(result.playerId);
-			});
-		},
+    selectColor(color) {
+      if (!Config.browser) return;
+      browserStore.currentColor = color;
+    },
 
-		getHighscoreResultPerLevel(level) {
-			const winResults = this.getGameResultsPerLevel(level).filter(result => !result.isGameOver());
-			const sortedResults = [...winResults].sort((a, b) => b.score - a.score);
-			return sortedResults[0];
-		},
+    selectHidingMode(hidingMode) {
+      if (!Config.browser) return;
+      browserStore.currentHidingMode = hidingMode;
+    },
 
-		getGameResultsForPlayer(player) {
-			return this.gameResults.filter(result => result.playerId === player.id);
-		},
+    getGameResultsPerLevel(level) {
+      return this.gameResults.filter((result) => {
+        return (
+          result.level === level.ordinal &&
+          !!this.getPlayerById(result.playerId)
+        );
+      });
+    },
 
-		isLevelUnlocked(level, player) {
-			if (!level.levelRequiredId) return true;
-			const results = this.getGameResultsForPlayer(player);
-			// here we are checking if the user played and win the required level to unlock this level
-			return results.some(
-				result => !result.isGameOver() && result.getLevel().id === level.levelRequiredId,
-			);
-		},
-	},
+    getHighscoreResultPerLevel(level) {
+      const winResults = this.getGameResultsPerLevel(level).filter(
+          (result) => !result.isGameOver(),
+      );
+      const sortedResults = [...winResults].sort((a, b) => b.score - a.score);
+      return sortedResults[0];
+    },
+
+    getGameResultsForPlayer(player) {
+      return this.gameResults.filter((result) => result.playerId === player.id);
+    },
+
+    isLevelUnlocked(level, player) {
+      if (!level.levelRequiredId) return true;
+      const results = this.getGameResultsForPlayer(player);
+      // here we are checking if the user played and won in the
+      // the required level to unlock this level
+      return results.some(
+          (result) =>
+            !result.isGameOver() &&
+          result.getLevel().id === level.levelRequiredId,
+      );
+    },
+  },
 });

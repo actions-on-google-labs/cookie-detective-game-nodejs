@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="26.875"
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26"
+     height="26.875"
      viewBox="0 0 26 26.875">
 
   <defs>
@@ -9,7 +10,8 @@
       filter: url(#time-filter);
       }
     </style>
-    <filter id="time-filter" x="1240" y="420.125" width="26" height="26.875" filterUnits="userSpaceOnUse">
+    <filter id="time-filter" x="1240" y="420.125" width="26" height="26.875"
+            filterUnits="userSpaceOnUse">
       <feOffset result="offset" dy="3" in="SourceAlpha"/>
       <feGaussianBlur result="blur" stdDeviation="1.732"/>
       <feFlood result="flood" flood-opacity="0.2"/>

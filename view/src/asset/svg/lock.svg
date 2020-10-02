@@ -1,13 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="90" height="111.156" viewBox="0 0 90 111.156">
-<defs>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="90"
+     height="111.156" viewBox="0 0 90 111.156">
+  <defs>
     <style>
       .lock {
-        fill: #fff;
-        fill-rule: evenodd;
-        filter: url(#lock-filter);
+      fill: #fff;
+      fill-rule: evenodd;
+      filter: url(#lock-filter);
       }
     </style>
-    <filter id="lock-filter" x="595" y="419.844" width="90" height="111.156" filterUnits="userSpaceOnUse">
+    <filter id="lock-filter" x="595" y="419.844" width="90" height="111.156"
+            filterUnits="userSpaceOnUse">
       <feOffset result="offset" dy="4" in="SourceAlpha"/>
       <feGaussianBlur result="blur" stdDeviation="1.732"/>
       <feFlood result="flood" flood-opacity="0.12"/>
@@ -32,5 +34,7 @@
       <feBlend result="blend-4" mode="multiply" in2="blend-3"/>
     </filter>
   </defs>
-  <path class="lock" d="M665.917,450.214h-4.37v-8.681a21.851,21.851,0,0,0-43.7,0v8.681h-4.37a8.736,8.736,0,0,0-8.74,8.681v43.4a8.736,8.736,0,0,0,8.74,8.68h52.44a8.736,8.736,0,0,0,8.74-8.68V458.9A8.736,8.736,0,0,0,665.917,450.214ZM639.7,489.277a8.681,8.681,0,1,1,8.74-8.681A8.736,8.736,0,0,1,639.7,489.277Zm13.547-39.063H626.15v-8.681a13.547,13.547,0,0,1,27.094,0v8.681Z" transform="translate(-595 -419.844)"/>
+  <path class="lock"
+        d="M665.917,450.214h-4.37v-8.681a21.851,21.851,0,0,0-43.7,0v8.681h-4.37a8.736,8.736,0,0,0-8.74,8.681v43.4a8.736,8.736,0,0,0,8.74,8.68h52.44a8.736,8.736,0,0,0,8.74-8.68V458.9A8.736,8.736,0,0,0,665.917,450.214ZM639.7,489.277a8.681,8.681,0,1,1,8.74-8.681A8.736,8.736,0,0,1,639.7,489.277Zm13.547-39.063H626.15v-8.681a13.547,13.547,0,0,1,27.094,0v8.681Z"
+        transform="translate(-595 -419.844)"/>
 </svg>

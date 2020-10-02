@@ -1,3 +1,17 @@
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 synonym:
   entities:
     blue tin:
@@ -14,6 +28,8 @@ synonym:
       synonyms:
       - bowls
       - bowl
+      - the bowls
+      - the bowl
     carrots:
       synonyms:
       - carrots
@@ -29,9 +45,11 @@ synonym:
     cookie jar:
       synonyms:
       - cookie jar
+      - jar
     cupboard:
       synonyms:
       - cupboard
+      - cabinet
     cups:
       synonyms:
       - cups
@@ -58,10 +76,6 @@ synonym:
       synonyms:
       - fruit bowl
       - fruit
-    jars:
-      synonyms:
-      - jars
-      - jar
     ketchup bottle:
       synonyms:
       - ketchup bottle
@@ -70,6 +84,11 @@ synonym:
     life saver:
       synonyms:
       - life saver
+      - floatie
+      - float
+      - tube
+      - pool float
+      - pool tube
     mustard bottle:
       synonyms:
       - mustard bottle
@@ -84,6 +103,10 @@ synonym:
       synonyms:
       - pink flower
       - pink flowers
+      - flowers
+      - flower
+      - flower pot
+      - flowers pot
     plant:
       synonyms:
       - plant
@@ -95,7 +118,3 @@ synonym:
       synonyms:
       - salt shaker
       - salt
-    yellow flower:
-      synonyms:
-      - yellow flower
-      - yellow flowers

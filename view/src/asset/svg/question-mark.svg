@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="26.406"
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20"
+     height="26.406"
      viewBox="0 0 20 26.406">
 
   <defs>
@@ -9,7 +10,8 @@
       filter: url(#question-mark-filter);
       }
     </style>
-    <filter id="question-mark-filter" x="1243" y="347.594" width="20" height="26.406" filterUnits="userSpaceOnUse">
+    <filter id="question-mark-filter" x="1243" y="347.594" width="20" height="26.406"
+            filterUnits="userSpaceOnUse">
       <feOffset result="offset" dy="3" in="SourceAlpha"/>
       <feGaussianBlur result="blur" stdDeviation="1.732"/>
       <feFlood result="flood" flood-opacity="0.2"/>
